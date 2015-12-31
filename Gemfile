@@ -51,4 +51,6 @@ end
 
 group :test do
   gem 'shoulda-matchers', '~> 3.0'
+  gem 'fabrication'
+  gem 'faker'
 end

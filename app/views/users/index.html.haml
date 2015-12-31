@@ -1,8 +1,11 @@
 .container
-  .image-random
-    = image_tag "#"
-    
+  .heading
+    %h1 Producers List
+
   .producer-list
-    - 5.times do
-      %h4 Username
-      %p This is a short sentence about the user
+    - @users.each do |user|
+      .producer-item
+        = image_tag "#"
+        %h4 #{user.username}
+        %h4 #{user.email}
+        %p This is a short sentence about the user
