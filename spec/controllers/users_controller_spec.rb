@@ -7,7 +7,7 @@ describe UsersController do
       joe = Fabricate(:user)
       get :index
       expect(assigns(:users)).to eq([alice, joe])
-    end 
+    end
   end
 
   describe "GET #new" do
@@ -101,6 +101,26 @@ describe UsersController do
         put :update, id: joe.id, user: { username: "", email: "drinkup@gmail.com" }
         expect(flash[:danger]).to be_present
       end
+    end
+  end
+
+  describe "DELETE #destroy" do
+    it "removes the user from the database" do
+      joe = Fabricate(:user)
+      delete :destroy, id: joe.id
+      expect(User.count).to eq(0)
+    end
+
+    it "redirects to the users index path" do
+      joe = Fabricate(:user)
+      delete :destroy, id: joe.id
+      expect(response).to redirect_to users_path
+    end
+
+    it "sets the flash success message" do
+      joe = Fabricate(:user)
+      delete :destroy, id: joe.id
+      expect(flash[:success]).to be_present
     end
   end
 end
