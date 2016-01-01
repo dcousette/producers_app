@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.create(username: params[:user][:username], email: params[:user][:email])
+    user = User.create(username: params[:user][:username], email: params[:user][:email], password: params[:user][:password])
 
     if user.save
       flash[:success] = "Your new user has been created."

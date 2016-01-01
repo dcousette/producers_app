@@ -1,0 +1,12 @@
+.container
+  .flash-errors-display
+    - if flash[:danger]
+      .flash-message.alert.alert-danger.alert-dismissable.fade.in
+        %button.close(type="button" data-dismiss="alert" aria-label="Close")
+          %span(aria-hidden="true") &times;
+        %p= flash[:danger]
+    - elsif flash[:success]
+      .flash-message.alert.alert-success.alert-dismissable
+        %button.close(type="button" data-dismiss="alert" aria-label="Close")
+          %span(aria-hidden="true") &times;
+        %p= flash[:success]

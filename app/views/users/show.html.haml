@@ -3,3 +3,5 @@
     %h2 #{@user.username}'s Profile Page
     %p Email: #{@user.email}
     %p Twitter
+
+  = link_to "Sign Out", signout_path, method: :delete
