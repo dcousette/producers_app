@@ -1,0 +1,15 @@
+.container
+  .heading
+    %h3 New User Sign up
+
+  .new-user-form
+    = form_for @user, class: 'form-horizontal' do |f|
+      .form-group
+        = f.label :username
+        = f.text_field :username, class: 'form-control'
+
+      .form-group
+        = f.label :email
+        = f.text_field :email, class: 'form-control'
+
+      = f.submit "Sign Up", class: 'btn btn-primary'
