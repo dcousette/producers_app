@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  before_action :require_sign_in, only: [:index, :edit, :update, :destroy]
+  before_action :require_access, only: [:edit]
+
   def index
     @users = User.all
   end
@@ -44,5 +47,14 @@ class UsersController < ApplicationController
     user.destroy
     flash[:success] = "The user has been deleted"
     redirect_to users_path
+  end
+
+  private
+
+  def require_sign_in
+    if session[:user_id] == nil
+      flash[:danger] = "Please sign in!"
+      redirect_to signin_path
+    end
   end
 end

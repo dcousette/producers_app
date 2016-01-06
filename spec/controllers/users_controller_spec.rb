@@ -2,9 +2,14 @@ require 'rails_helper'
 
 describe UsersController do
   describe "GET #index" do
+    it_behaves_like "require sign in" do
+      let(:action) { get :index }
+    end
+
     it "sets an array of all users to @users" do
       alice = Fabricate(:user)
       joe = Fabricate(:user)
+      set_up_user(alice)
       get :index
       expect(assigns(:users)).to eq([alice, joe])
     end
@@ -54,15 +59,34 @@ describe UsersController do
   end
 
   describe "GET #edit" do
+    let(:joe) { Fabricate(:user) }
+
+    it_behaves_like "require sign in" do
+      let(:action) { get :edit, id: joe.id }
+    end
+
     it "sets up the @user" do
-      joe = Fabricate(:user)
+      set_up_user(joe)
       get :edit, id: joe.id
       expect(assigns(:user).id).to eq(joe.id)
+    end
+
+    it "redirects unauthorized users to the users page" do
+      set_up_user(joe)
+      jane = Fabricate(:user)
+      get :edit, id: jane.id
+      expect(response).to redirect_to users_path
     end
   end
 
   describe "PUT #update" do
     let(:joe) { Fabricate(:user, username: "Joe Smith") }
+
+    it_behaves_like "require sign in" do
+      let(:action) { put :update, id: joe.id, user: { username: "Bad Bill Cosby", email: "drinkup@gmail.com" } }
+    end
+
+    before { set_up_user(joe) }
 
     context "with valid input" do
       it "retrieves and sets up user" do
@@ -105,20 +129,25 @@ describe UsersController do
   end
 
   describe "DELETE #destroy" do
+    let(:joe) { Fabricate(:user) }
+
+    it_behaves_like "require sign in" do
+      let(:action) { delete :destroy, id: joe.id }
+    end
+
+    before { set_up_user(joe) }
+
     it "removes the user from the database" do
-      joe = Fabricate(:user)
       delete :destroy, id: joe.id
       expect(User.count).to eq(0)
     end
 
     it "redirects to the users index path" do
-      joe = Fabricate(:user)
       delete :destroy, id: joe.id
       expect(response).to redirect_to users_path
     end
 
     it "sets the flash success message" do
-      joe = Fabricate(:user)
       delete :destroy, id: joe.id
       expect(flash[:success]).to be_present
     end
