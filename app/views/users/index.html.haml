@@ -4,7 +4,7 @@
 
   .producer-list
     - @users.each do |user|
-      .producer-item
+      .producer-item.well
         = image_tag "#"
         %h4 #{user.username}
         %h4 #{user.email}

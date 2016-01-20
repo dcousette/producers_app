@@ -25,9 +25,7 @@ gem 'pg'
 gem 'figaro'
 gem 'haml'
 gem 'bootstrap-sass', '~> 3.3.6'
-
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
@@ -39,6 +37,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'rspec-rails', '~> 3.0'
+  gem 'pry'
 end
 
 group :development do
