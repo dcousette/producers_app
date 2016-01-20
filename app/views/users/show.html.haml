@@ -4,4 +4,19 @@
     %p Email: #{@user.email}
     %p Twitter
 
+  .songs-table
+    %table.table
+      %thead
+        %tr
+          %td Song name
+          %td Song length
+          %td Song plays
+          %td Ranking
+      %tbody
+        %tr
+          %td Beat one
+          %td 3:50
+          %td 120
+          %td 50
+
   = link_to "Sign Out", signout_path, method: :delete
