@@ -14,9 +14,11 @@
           %td Ranking
       %tbody
         %tr
-          %td Beat one
+          %td song.name
           %td 3:50
           %td 120
           %td 50
 
   = link_to "Sign Out", signout_path, method: :delete
+  %br 
+  = link_to "Upload a song", new_user_song_path(current_user)
