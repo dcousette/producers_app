@@ -1,0 +1,11 @@
+.container.new-song
+  %h2 Upload new song
+
+  = form_for [@user, @song] do |f|
+    = f.label :name
+    = f.text_field :name
+
+    = f.label :song_file
+    = f.file_field :song_file
+
+    = f.submit 'Upload Song'
