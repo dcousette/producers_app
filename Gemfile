@@ -54,3 +54,7 @@ group :test do
   gem 'fabrication'
   gem 'faker'
 end
+
+group :production do
+  gem 'carrierwave-aws'
+end

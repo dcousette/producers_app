@@ -48,13 +48,4 @@ class UsersController < ApplicationController
     flash[:success] = "The user has been deleted"
     redirect_to users_path
   end
-
-  private
-
-  def require_sign_in
-    if session[:user_id] == nil
-      flash[:danger] = "Please sign in!"
-      redirect_to signin_path
-    end
-  end
 end
