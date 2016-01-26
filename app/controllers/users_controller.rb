@@ -18,7 +18,7 @@ class UsersController < ApplicationController
       redirect_to users_path
     else
       flash[:danger] = "Please retry"
-      render :new
+      redirect_to new_user_path
     end
   end
 
@@ -33,7 +33,7 @@ class UsersController < ApplicationController
   def update
     user = User.find(params[:id])
 
-    if user.update(username: params[:user][:username], email: params[:user][:email])
+    if user.update(username: params[:user][:username], email: params[:user][:email], password: params[:user][:password])
       flash[:success] = "Your profile has been updated"
       redirect_to user
     else

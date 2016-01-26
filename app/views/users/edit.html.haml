@@ -1,6 +1,6 @@
 .container
   .heading
-    %h3 Edit user 
+    %h3 Edit user
 
   .edit-user-form
     = form_for @user, class: 'form-horizontal' do |f|
@@ -11,5 +11,9 @@
       .form-group
         = f.label :email
         = f.text_field :email, class: 'form-control'
+
+      .form-group
+        = f.label :password
+        = f.password_field :password, class: 'form-control'
 
       = f.submit "Update User", class: 'btn btn-primary'

@@ -43,7 +43,7 @@ describe UsersController do
     context "with invalid input" do
       it "renders the new user template" do
         post :create, user: { username: "Joe Smith" }
-        expect(response).to render_template :new
+        expect(response).to redirect_to new_user_path 
       end
 
       it "does not add a user to the database" do
@@ -80,32 +80,32 @@ describe UsersController do
   end
 
   describe "PUT #update" do
-    let(:joe) { Fabricate(:user, username: "Joe Smith") }
+    let(:joe) { Fabricate(:user, username: "Joe Smith", password: 'joesmith') }
 
     it_behaves_like "require sign in" do
-      let(:action) { put :update, id: joe.id, user: { username: "Bad Bill Cosby", email: "drinkup@gmail.com" } }
+      let(:action) { put :update, id: joe.id, user: { username: "Bad Bill Cosby", email: "drinkup@gmail.com", password: 'joesmith' } }
     end
 
     before { set_up_user(joe) }
 
     context "with valid input" do
       it "retrieves and sets up user" do
-        put :update, id: joe.id, user: { username: "Bad Bill Cosby", email: "drinkup@gmail.com" }
+        put :update, id: joe.id, user: { username: "Bad Bill Cosby", email: "drinkup@gmail.com", password: 'joesmith' }
         expect(User.first).to eq(joe)
       end
 
       it "updates an attribute of the user" do
-        put :update, id: joe.id, user: { username: "Bad Bill Cosby", email: "drinkup@gmail.com" }
+        put :update, id: joe.id, user: { username: "Bad Bill Cosby", email: "drinkup@gmail.com", password: 'joesmith' }
         expect(User.first.username).to eq("Bad Bill Cosby")
       end
 
       it "redirects to the the user path" do
-        put :update, id: joe.id, user: { username: "Bad Bill Cosby", email: "drinkup@gmail.com" }
+        put :update, id: joe.id, user: { username: "Bad Bill Cosby", email: "drinkup@gmail.com", password: 'joesmith' }
         expect(response).to redirect_to user_path(joe.id)
       end
 
       it "sets the flash success message" do
-        put :update, id: joe.id, user: { username: "Bad Bill Cosby", email: "drinkup@gmail.com" }
+        put :update, id: joe.id, user: { username: "Bad Bill Cosby", email: "drinkup@gmail.com", password: 'joesmith' }
         expect(flash[:success]).to be_present
       end
     end
