@@ -1,11 +1,12 @@
 .container.new-song
   %h2 Upload new song
 
-  = form_for [@user, @song] do |f|
-    = f.label :name
-    = f.text_field :name
+  .new-song-form.col-md-4
+    = form_for [@user, @song] do |f|
+      = f.label :name
+      = f.text_field :name, class: 'form-control'
 
-    = f.label :song_file
-    = f.file_field :song_file
+      = f.label :song_file
+      = f.file_field :song_file, class: 'btn btn-primary'
 
-    = f.submit 'Upload Song'
+      = f.submit 'Upload Song', { class: 'btn btn-primary' }
