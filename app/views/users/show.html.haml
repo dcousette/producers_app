@@ -19,8 +19,13 @@
           %td 120
           %td 50
 
+  .audio-player
+    %audio(controls='controls')
+      Your browser does not support the <code>audio</code> element.
+      <source src="#{@user.songs.last.song_file}" type="audio/mpeg">
+
   = link_to "Edit Profile", edit_user_path(current_user)
-  %br 
+  %br
   = link_to "Sign Out", signout_path, method: :delete
   %br
   = link_to "Upload a song", new_user_song_path(current_user)
